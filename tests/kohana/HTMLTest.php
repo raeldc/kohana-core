@@ -13,58 +13,10 @@
  */
 Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 {	
-	protected $optionBackups = array();
-
-	protected $optionDefaults = array(
-			'HTTP_HOST'	=> 'kohanaframework.org',
-		);
-
-	function setUp()
-	{
-		// We don't need to backup HTTP_HOST as phpunit
-		// automatically backs-up / restores globals
-		$this->optionBackups = array(
-			'windowed_urls' => HTML::$windowed_urls,
-			'charset'		=> Kohana::$charset,
-			'protocol'		=> Request::$protocol,
-			'index_file'	=> Kohana::$index_file,
-		);
-
-		$this->setOptions($this->optionDefaults);
-	}
-
-	function tearDown()
-	{
-		$this->setOptions($this->optionBackups);
-	}
-
-	function setOptions(array $options)
-	{
-		if(isset($options['windowed_urls']))
-		{
-			HTML::$windowed_urls = $options['windowed_urls'];
-		}
-
-		if(isset($options['charset']))
-		{
-			Kohana::$charset = $options['charset'];
-		}
-
-		if(isset($options['protocol']))
-		{
-			Request::$protocol = $options['protocol'];
-		}
-
-		if(isset($options['index_file']))
-		{
-			Kohana::$index_file = $options['index_file'];
-		}
-
-		if(isset($options['HTTP_HOST']))
-		{
-			$_SERVER['HTTP_HOST'] = $options['HTTP_HOST'];
-		}
-	}
+	protected $environmentDefaults = array(
+		'Kohana::$base_url' => '/kohana/',
+		'HTTP_HOST'	=> 'www.kohanaframework.org',
+	);
 
 	/**
 	 * Provides test data for testAttributes()
@@ -94,7 +46,6 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerAttributes
-	 * @covers HTML::attributes
 	 * @param array  $attributes  Attributes to use
 	 * @param string $expected    Expected output
 	 */
@@ -125,7 +76,6 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::script()
 	 *
 	 * @test
-	 * @covers        HTML::script
 	 * @dataProvider  providerScript
 	 * @param string  $expected       Expected output
 	 * @param string  $file           URL to script
@@ -162,7 +112,6 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider  providerStyle
-	 * @covers        HTML::style
 	 * @param string  $expected     The expected output
 	 * @param string  $file         The file to link to
 	 * @param array   $attributes   Any extra attributes for the link
@@ -194,7 +143,6 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider   providerObfuscate
-	 * @covers         HTML::obfuscate
 	 * @param string   $string            The string to obfuscate
 	 */
 	function testObfuscate($string)
@@ -237,7 +185,7 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 */
 	function testAnchor($expected, array $options, $uri, $title = NULL, array $attributes = NULL, $protocol = NULL)
 	{
-		$this->setOptions($options);
+		$this->setEnvironment($options);
 
 		$this->assertSame(
 			$expected,

@@ -12,32 +12,8 @@
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-Class Kohana_URLTest extends PHPUnit_Framework_TestCase
+Class Kohana_URLTest extends Kohana_Unittest_TestCase
 {
-	/**
-	 * Tell PHPUnit to isolate globals during tests
-	 * @var boolean
-	 */
-	protected $backupGlobals = TRUE;
-
-	/**
-	 * Backup of Kohana::$base_url
-	 * @var string
-	 */
-	protected $_base_url = '';
-
-	/**
-	 * Backup of Request::$protocol
-	 * @var string
-	 */
-	protected $_protocol = '';
-
-	/**
-	 * Backup of Kohana::$index_file
-	 * @var string
-	 */
-	protected $_index_file = '';
-
 	/**
 	 * This is just a temp fix until f078401 is merged into the blessed phpunit repo
 	 * @var array
@@ -45,27 +21,24 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 	protected $_get =  array();
 
 	/**
-	 * Default values to set for base_url, index_file, protocol and HTTP_HOST
+	 * Default values for the environment, see setEnvironment
 	 * @var array
 	 */
-	protected $_defaults =	array(
-								'base_url'	=> '/kohana/',
-								'index_file'=> 'index.php',
-								'protocol'	=> 'http',
-								'HTTP_HOST' => 'example.com',
-								'_GET'		=> array(),
-							);
+	protected $environmentDefault =	array(
+		'Kohana::$base_url'	=> '/kohana/',
+		'Kohana::$index_file'=> 'index.php',
+		'Request::$protocol'	=> 'http',
+		'HTTP_HOST' => 'example.com',
+		'_GET'		=> array(),
+	);
+
 	/**
 	 * Sets up the enviroment for each test, loads default enviroment values
 	 */
 	function setUp()
 	{
-		$this->_base_url = Kohana::$base_url;
-		$this->_protocol = Request::$protocol;
-		$this->_index_file = Kohana::$index_file;
 		$this->_get = $_GET;
-
-		$this->setEnviroment($this->_defaults);
+		parent::setUp();
 	}
 
 	/**
@@ -73,52 +46,10 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 	 */
 	function tearDown()
 	{
-		Kohana::$base_url = $this->_base_url;
-		Request::$protocol = $this->_protocol;
-		Kohana::$index_file = $this->_index_file;
+		parent::tearDown();
 		$_GET = $this->_get;
 	}
 
-	/**
-	 * Changes certain aspects of the enviroment
-	 *
-	 * @param array $vars
-	 * @return boolean
-	 */
-	function setEnviroment(array $vars)
-	{
-		if(empty($vars))
-		{
-			return FALSE;
-		}
-
-		if(isset($vars['base_url']))
-		{
-			Kohana::$base_url = $vars['base_url'];
-		}
-
-		if(isset($vars['protocol']))
-		{
-			Request::$protocol = $vars['protocol'];
-		}
-
-		if(isset($vars['index_file']))
-		{
-			Kohana::$index_file = $vars['index_file'];
-		}
-
-		if(isset($vars['HTTP_HOST']))
-		{
-			$_SERVER['HTTP_HOST'] = $vars['HTTP_HOST'];
-		}
-
-		if (isset($vars['_GET']))
-		{
-			$_GET = $vars['_GET'];
-		}
-
-		return TRUE;
-	}
 
 	/**
 	 * Provides test data for testBase()
@@ -142,11 +73,11 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 
 			//
 			// These tests make sure that the protocol changes when the global setting changes
-			array(TRUE,   TRUE,   'https://example.com/kohana/index.php/', array('protocol' => 'https')),
-			array(FALSE,  TRUE,   'https://example.com/kohana/', array('protocol' => 'https')),
+			array(TRUE,   TRUE,   'https://example.com/kohana/index.php/', array('Request::$protocol' => 'https')),
+			array(FALSE,  TRUE,   'https://example.com/kohana/', array('Request::$protocol' => 'https')),
 
 			// Change base url
-			array(FALSE, 'https', 'https://example.com/kohana/', array('base_url' => 'omglol://example.com/kohana/'))
+			array(FALSE, 'https', 'https://example.com/kohana/', array('Kohana::$base_url' => 'omglol://example.com/kohana/'))
 		);
 	}
 
@@ -158,11 +89,11 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 	 * @param boolean $index       Parameter for Url::base()
 	 * @param boolean $protocol    Parameter for Url::base()
 	 * @param string  $expected    Expected url
-	 * @param array   $enviroment  Array of enviroment vars to change @see Kohana_URLTest::setEnviroment()
+	 * @param array   $enviroment  Array of enviroment vars to change @see Kohana_URLTest::setEnvironment()
 	 */
 	function testBase($index, $protocol, $expected, array $enviroment = array())
 	{
-		$this->setEnviroment($enviroment);
+		$this->setEnvironment($enviroment);
 
 		$this->assertSame(
 			$expected,
@@ -213,7 +144,7 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 	 */
 	function testSite($uri, $protocol, $expected, array $enviroment = array())
 	{
-		$this->setEnviroment($enviroment);
+		$this->setEnvironment($enviroment);
 
 		$this->assertSame(
 			$expected,
@@ -292,7 +223,7 @@ Class Kohana_URLTest extends PHPUnit_Framework_TestCase
 	 */
 	function testQuery($params, $expected, $enviroment)
 	{
-		$this->setEnviroment($enviroment);
+		$this->setEnvironment($enviroment);
 
 		$this->assertSame(
 			$expected,

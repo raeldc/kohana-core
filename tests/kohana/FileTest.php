@@ -64,8 +64,7 @@ class Kohana_FileTest extends PHPUnit_Framework_TestCase
 	 * @param boolean $expected Output for File::mime
 	 */
 	function testSplitJoin($input, $peices, $expected)
-	{	
-		echo Kohana::debug(File::split($input, $peices));
+	{
 		$this->assertSame($expected, File::split($input, $peices));
 		$this->assertSame($expected, File::join($input));
 	}

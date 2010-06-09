@@ -33,7 +33,6 @@ Class Kohana_NumTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerOrdinal
-	 * @covers Num::ordinal
 	 * @param integer $number
 	 * @param <type> $expected
 	 */
@@ -63,7 +62,6 @@ Class Kohana_NumTest extends Kohana_Unittest_TestCase
 	 * @todo test locales
 	 * @test
 	 * @dataProvider providerFormat
-	 * @covers Num::format
 	 * @param integer $number
 	 * @param integer $places
 	 * @param boolean $monetary

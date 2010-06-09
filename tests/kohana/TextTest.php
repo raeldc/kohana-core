@@ -21,7 +21,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 * an empty input was provided
 	 *
 	 * @test
-	 * @covers Text::auto_p
 	 */
 	function testAutoParaReturnsEmptyStringOnEmptyInput()
 	{
@@ -52,7 +51,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerAutoParaDoesNotEncloseHtmlTagsInParagraphs
-	 * @covers Text::auto_p
 	 */ 
 	function testAutoParaDoesNotEncloseHtmlTagsInParagraphcs(array $tags, $text)
 	{
@@ -72,7 +70,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 * with paragraph tags
 	 *
 	 * @test
-	 * @covers Text::auto_p
 	 */
 	function testAutoParaEnclosesSLOTInParagraph()
 	{
@@ -101,7 +98,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerLimitWords
-	 * @covers Text::limit_words
 	 */
 	function testLimitWords($expected, $str, $limit, $end_char)
 	{
@@ -142,7 +138,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 * Test Text::alternate()
 	 *
 	 * @test
-	 * @covers Text::alternate
 	 * @group testdox
 	 */
 	function testAlternateAlternatesBetweenParameters()
@@ -193,7 +188,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerReduceSlashes
-	 * @covers Text::reduce_slashes
 	 */
 	function testReduceSlashes($expected, $str)
 	{
@@ -225,7 +219,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerCensor
-	 * @covers Text::censor
 	 */
 	function testCensor($expected, $str, $badwords, $replacement, $replace_partial_words)
 	{
@@ -337,7 +330,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerBytes
-	 * @covers Text::bytes
 	 */
 	function testBytes($expected, $bytes, $force_unit, $format, $si)
 	{
@@ -364,7 +356,6 @@ Class Kohana_TextTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerWidont
-	 * @covers Text::widont
 	 */
 	function testWidont($expected, $string)
 	{

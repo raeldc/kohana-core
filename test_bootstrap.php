@@ -9,7 +9,7 @@
  */
 $system = '.';
 $application = '.';
-$modules = '../';
+$modules = '../modules';
 
 /**
  * The default extension of resource files. If you change this, all resources
@@ -142,7 +142,7 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	'unittest'      => MODPATH.'Kohana-Unittest'
+	'unittest'      => MODPATH.'unittest'
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool

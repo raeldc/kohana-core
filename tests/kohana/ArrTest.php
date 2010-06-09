@@ -367,4 +367,55 @@ Class Kohana_ArrTest extends Kohana_Unittest_TestCase
 			Arr::binary_search($needle, $haystack, $sort)
 		);
 	}
+
+	/**
+	 * Provides test data for testMap
+	 *
+	 * @return array Test Data
+	 */
+	function providerMap()
+	{
+		return array(
+			array('strip_tags', array('<p>foobar</p>'), array('foobar')),
+			array('strip_tags', array(array('<p>foobar</p>'), array('<p>foobar</p>')), array(array('foobar'), array('foobar'))),
+		);
+	}
+
+	/**
+	 *
+	 * @test
+	 * @dataProvider providermap
+	 */
+	function testMap($method, $source, $expected)
+	{
+		$this->assertSame(
+			$expected,
+			Arr::map($method, $source)
+		);
+	}
+
+	/**
+	 * Provides test data for testFlatten
+	 *
+	 * @return array Test Data
+	 */
+	function providerFlatten()
+	{
+		return array(
+			array(array('set' => array('one' => 'something'), 'two' => 'other'), array('one' => 'something', 'two' => 'other')),
+		);
+	}
+
+	/**
+	 *
+	 * @test
+	 * @dataProvider providerFlatten
+	 */
+	function testFlatten($source, $expected)
+	{
+		$this->assertSame(
+			$expected,
+			Arr::flatten($source)
+		);
+	}
 }

@@ -109,4 +109,26 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 
 		$this->assertSame('info/about_us', $route->uri(array('some' => 'random', 'params' => 'to confuse')));
 	}
+
+	/**
+	 * Tests route caching
+	 * 
+	 * @todo remove the cached files. need to delete the cache before running the unit tests to get coverage
+	 *
+	 * @test
+	 * @covers Route::cache
+	 */
+	function test_cache_name()
+	{
+		$this->assertSame(FALSE, Route::cache());
+		Route::set('foobar', '(<controller>(/<action>(/<id>)))')
+			->defaults(array(
+				'controller' => 'welcome',
+			)
+		);
+
+		$route = Route::get('foobar');
+		$this->assertSame('foobar', Route::name($route)); // Why doesn't this give code coverage to name() ?
+		$this->assertSame(NULL, Route::cache(TRUE));
+	}
 }

@@ -95,6 +95,38 @@ class Kohana_RequestTest extends Kohana_Unittest_TestCase
 		Kohana::$is_cli = TRUE;
 		$_SERVER = $old_server;
 	}
+
+	/**
+	 * Provides test data for Request::accept_lang()
+	 * @return array
+	 */
+	public function providerAcceptLang()
+	{
+		return array(
+			array('en-us', 1, array('_SERVER' => array('HTTP_ACCEPT_LANGUAGE' => 'en-us,en;q=0.5'))),
+			array('en-us', 1, array('_SERVER' => array('HTTP_ACCEPT_LANGUAGE' => 'en-gb'))),
+			array('en-us', 1, array('_SERVER' => array('HTTP_ACCEPT_LANGUAGE' => 'sp-sp;q=0.5')))
+		);
+	}
+
+	/**
+	 * Tests Request::accept_lang()
+	 *
+	 * @test
+	 * @dataProvider providerAcceptLang
+	 * @param array $params Query string
+	 * @param string $expected Expected result
+	 * @param array $enviroment Set environment
+	 */
+	function testAcceptLang($params, $expected, $enviroment)
+	{
+		$this->setEnvironment($enviroment);
+
+		$this->assertEquals(
+			$expected,
+			Request::accept_lang($params)
+		);
+	}
 }
 
 class Controller_Foo extends Controller {

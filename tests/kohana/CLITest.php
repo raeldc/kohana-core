@@ -62,10 +62,26 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	}
 
 	/**
+	 * If for some reason arc != count(argv) then we need
+	 * to fail gracefully.
+	 *
+	 * This test ensures it will
+	 *
+	 * @test
+	 */
+	function test_only_loops_over_available_arguments()
+	{
+		++$_SERVER['argc'];
+		
+		$options = CLI::options('uri');
+
+		$this->assertSame(1, count($options));
+	}
+
+	/**
 	 * Options should only parse arguments requested
 	 *
 	 * @test
-	 * @covers CLI::options
 	 */
 	function test_only_parses_wanted_arguments()
 	{
@@ -81,7 +97,6 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * Options should not parse invalid arguments (i.e. not starting with --_
 	 *
 	 * @test
-	 * @covers CLI::options
 	 */
 	function test_does_not_parse_invalid_arguments()
 	{
@@ -96,7 +111,6 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * Options should parse multiple arguments & values correctly
 	 *
 	 * @test
-	 * @covers CLI::options
 	 */
 	function test_parses_multiple_arguments()
 	{
@@ -113,7 +127,6 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * Options should parse arguments without specified values as NULL
 	 *
 	 * @test
-	 * @covers CLI::options
 	 */
 	function test_parses_arguments_without_value_as_null()
 	{
@@ -124,9 +137,9 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * 
+	 * If the argument contains an equals sign then it shouldn't be split
+	 *
 	 * @test
-	 * @covers CLI::options
 	 * @ticket 2642
 	 */
 	function test_cli_only_splits_on_the_first_equals()

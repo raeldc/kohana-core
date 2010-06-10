@@ -161,23 +161,25 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 		return array(
 			// Tests that..
 			// Title is converted to lowercase
-			array('WE SHALL NOT BE MOVED', '-', 'we-shall-not-be-moved'),
+			array('we-shall-not-be-moved', 'WE SHALL NOT BE MOVED', '-'),
 			// Excessive white space is removed and replaced with 1 char
-			array('THISSSSSS         IS       IT  ', '-', 'thissssss-is-it'),
+			array('thissssss-is-it', 'THISSSSSS         IS       IT  ', '-'),
 			// separator is either - (dash) or _ (underscore) & others are converted to underscores
-			array('some title', '-', 'some-title'),
-			array('some title', '_', 'some_title'),
-			array('some title', '!', 'some!title'),
-			array('some title', ':', 'some:title'),
+			array('some-title', 'some title', '-'),
+			array('some_title', 'some title', '_'),
+			array('some!title', 'some title', '!'),
+			array('some:title', 'some title', ':'),
 			// Numbers are preserved
-			array('99 Ways to beat apple', '-', '99-ways-to-beat-apple'),
+			array('99-ways-to-beat-apple', '99 Ways to beat apple', '-'),
 			// ... with lots of spaces & caps
-			array('99    ways   TO beat      APPLE', '_', '99_ways_to_beat_apple'),
-			array('99    ways   TO beat      APPLE', '-', '99-ways-to-beat-apple'),
+			array('99_ways_to_beat_apple', '99    ways   TO beat      APPLE', '_'),
+			array('99-ways-to-beat-apple', '99    ways   TO beat      APPLE', '-'),
 			// Invalid characters are removed
-			array('Each GBP(£) is now worth 32 USD($)', '-', 'each-gbp-is-now-worth-32-usd'),
+			array('each-gbp-is-now-worth-32-usd', 'Each GBP(£) is now worth 32 USD($)', '-'),
 			// ... inc. separator
-			array('Is it reusable or re-usable?', '-', 'is-it-reusable-or-re-usable'),
+			array('is-it-reusable-or-re-usable', 'Is it reusable or re-usable?', '-'),
+			// Doing some crazy UTF8 tests
+			array('espana-wins', 'Espanã-wins', '-', TRUE),
 		);
 	}
 
@@ -190,11 +192,11 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	 * @param string $separator    Seperate to replace invalid characters with
 	 * @param string $expected     Expected result
 	 */
-	function testTitle($title, $separator, $expected)
+	function testTitle($expected, $title, $separator, $ascii_only = FALSE)
 	{
 		$this->assertSame(
 			$expected,
-			URL::title($title, $separator)
+			URL::title($title, $separator, $ascii_only)
 		);
 	}
 

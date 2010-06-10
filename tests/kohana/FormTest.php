@@ -236,7 +236,7 @@ class Kohana_FormTest extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			// $value, $result
-			array('foo', 'bar', array('src' => 'media/img/login.png'), '<input type="image" name="foo" value="bar" src="media/img/login.png" />'),
+			array('foo', 'bar', array('src' => 'media/img/login.png'), '<input type="image" name="foo" value="bar" src="/media/img/login.png" />'),
 		);
 	}
 

@@ -9,11 +9,11 @@
 Class Kohana_SecurityTest extends Kohana_Unittest_TestCase
 {
 	/**
-	 * Provides test data for testEnvodePHPTags()
+	 * Provides test data for test_envode_php_tags()
 	 *
 	 * @return array Test data sets
 	 */
-	function providerEncodePHPTags()
+	function provider_encode_php_tags()
 	{
 		return array
 			(	
@@ -25,10 +25,10 @@ Class Kohana_SecurityTest extends Kohana_Unittest_TestCase
 	 * Tests Security::encode_php_tags()
 	 *
 	 * @test
-	 * @dataProvider providerEncodePHPTags
+	 * @dataProvider provider_encode_php_tags
 	 * @covers Security::encode_php_tags
 	 */
-	function testEncodePHPTags($expected, $input)
+	function test_encode_php_tags($expected, $input)
 	{
 		$this->assertSame($expected, Security::encode_php_tags($input));
 	}
@@ -42,7 +42,7 @@ Class Kohana_SecurityTest extends Kohana_Unittest_TestCase
 	 * @ticket 2676
 	 * @see http://www.hakipedia.com/index.php/Poison_Null_Byte#Perl_PHP_Null_Byte_Injection
 	 */
-	function testXssCleanRemovesNullBytes()
+	function test_xss_clean_removes_null_bytes()
 	{
 		$input = "<\0script>alert('XSS');<\0/script>";
 

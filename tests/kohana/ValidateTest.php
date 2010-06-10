@@ -16,10 +16,10 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * Provides test data for testAlpha()
+	 * Provides test data for test_alpha()
 	 * @return array
 	 */
-	public function providerAlpha()
+	public function provider_alpha()
 	{
 		return array(
 			array('asdavafaiwnoabwiubafpowf', TRUE),
@@ -39,11 +39,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerAlpha
+	 * @dataProvider provider_alpha
 	 * @param string  $string
 	 * @param boolean $expected
 	 */
-	public function testAlpha($string, $expected, $utf8 = FALSE)
+	public function test_alpha($string, $expected, $utf8 = FALSE)
 	{
 		$this->assertSame(
 			$expected,
@@ -52,9 +52,9 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/*
-	 * Provides test data for testAlphaNumeric
+	 * Provides test data for test_alpha_numeric
 	 */
-	public function provideAlphaNumeric()
+	public function provide_alpha_numeric()
 	{
 		return array(
 			array('abcd1234',  TRUE),
@@ -75,11 +75,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider provideAlphaNumeric
+	 * @dataProvider provide_alpha_numeric
 	 * @param string  $input     The string to test
 	 * @param boolean $expected  Is $input valid
 	 */
-	public function testAlphaNumeric($input, $expected, $utf8 = FALSE)
+	public function test_alpha_numeric($input, $expected, $utf8 = FALSE)
 	{
 		$this->assertSame(
 			$expected,
@@ -88,9 +88,9 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides test data for testAlphaDash
+	 * Provides test data for test_alpha_dash
 	 */
-	public function providerAlphaDash()
+	public function provider_alpha_dash()
 	{
 		return array(
 			array('abcdef',     TRUE),
@@ -108,12 +108,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerAlphaDash
+	 * @dataProvider provider_alpha_dash
 	 * @param string  $input          The string to test
 	 * @param boolean $contains_utf8  Does the string contain utf8 specific characters
 	 * @param boolean $expected       Is $input valid?
 	 */
-	public function testAlphaDash($input, $expected, $contains_utf8 = FALSE)
+	public function test_alpha_dash($input, $expected, $contains_utf8 = FALSE)
 	{
 		if( ! $contains_utf8)
 		{
@@ -132,7 +132,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the valid::date() test
 	 */
-	public function providerDate()
+	public function provider_date()
 	{
 		return array(
 			array('now',TRUE),
@@ -154,11 +154,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerDate
+	 * @dataProvider provider_date
 	 * @param string  $date  The date to validate
 	 * @param integer $expected
 	 */
-	public function testDate($date, $expected)
+	public function test_date($date, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -169,7 +169,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the valid::decimal() test
 	 */
-	public function providerDecimal()
+	public function provider_decimal()
 	{
 		return array(
 			array('45.1664',  3,    NULL, FALSE),
@@ -183,13 +183,13 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerDecimal
+	 * @dataProvider provider_decimal
 	 * @param string  $decimal  The decimal to validate
 	 * @param integer $places   The number of places to check to
 	 * @param integer $digits   The number of digits preceding the point to check
 	 * @param boolean $expected Whether $decimal conforms to $places AND $digits
 	 */
-	public function testDecimal($decimal, $places, $digits, $expected)
+	public function test_decimal($decimal, $places, $digits, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -199,10 +199,10 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides test data for testDigit
+	 * Provides test data for test_digit
 	 * @return array
 	 */
-	public function providerDigit()
+	public function provider_digit()
 	{
 		return array(
 			array('12345',    TRUE),
@@ -217,11 +217,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerDigit
+	 * @dataProvider provider_digit
 	 * @param mixed   $input     Input to validate
 	 * @param boolean $expected  Is $input valid
 	 */
-	public function testDigit($input, $expected, $contains_utf8 = FALSE)
+	public function test_digit($input, $expected, $contains_utf8 = FALSE)
 	{
 		if( ! $contains_utf8)
 		{
@@ -241,7 +241,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the valid::color() test
 	 */
-	public function providerColor()
+	public function provider_color()
 	{
 		return array(
 			array('#000000', TRUE),
@@ -263,11 +263,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerColor
+	 * @dataProvider provider_color
 	 * @param string  $color     The color to test
 	 * @param boolean $expected  Is $color valid
 	 */
-	public function testColor($color, $expected)
+	public function test_color($color, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -276,9 +276,9 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides test data for testCreditCard()
+	 * Provides test data for test_credit_card()
 	 */
-	public function providerCreditCard()
+	public function provider_credit_card()
 	{
 		return array(
 			array('4222222222222',    'visa',       TRUE),
@@ -299,12 +299,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 * @test
 	 * @covers Validate::credit_card
 	 * @group kohana.validation.helpers
-	 * @dataProvider  providerCreditCard()
+	 * @dataProvider  provider_credit_card()
 	 * @param string  $number   Credit card number
 	 * @param string  $type	    Credit card type
 	 * @param boolean $expected
 	 */
-	public function testCreditCard($number, $type, $expected)
+	public function test_credit_card($number, $type, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -314,11 +314,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 
 
 	/**
-	 * Provides test data for testEmail()
+	 * Provides test data for test_email()
 	 *
 	 * @return array
 	 */
-	function providerEmail()
+	function provider_email()
 	{
 		return array(
 			array('foo', TRUE,  FALSE),
@@ -341,12 +341,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerEmail
+	 * @dataProvider provider_email
 	 * @param string  $email   Address to check
 	 * @param boolean $strict  Use strict settings
 	 * @param boolean $correct Is $email address valid?
 	 */
-	function testEmail($email, $strict, $correct)
+	function test_email($email, $strict, $correct)
 	{
 		$this->assertSame(
 			$correct,
@@ -355,11 +355,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Returns test data for testEmailDomain()
+	 * Returns test data for test_email_domain()
 	 *
 	 * @return array
 	 */
-	function providerEmailDomain()
+	function provider_email_domain()
 	{
 		return array(
 			array('google.com', TRUE),
@@ -378,11 +378,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerEmailDomain
+	 * @dataProvider provider_email_domain
 	 * @param string  $email   Email domain to check
 	 * @param boolean $correct Is it correct?
 	 */
-	function testEmailDomain($email, $correct)
+	function test_email_domain($email, $correct)
 	{
 		if(substr(PHP_OS, 0, 3) != 'win' OR version_compare(PHP_VERSION, '5.3.0', '>='))
 		{
@@ -399,11 +399,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides data for testExactLength()
+	 * Provides data for test_exact_length()
 	 *
 	 * @return array
 	 */
-	function providerExactLength()
+	function provider_exact_length()
 	{
 		return array(
 			array('somestring', 10, TRUE),
@@ -419,13 +419,13 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerExactLength
+	 * @dataProvider provider_exact_length
 	 * @param string  $string  The string to length check
 	 * @param integer $length  The length of the string
 	 * @param boolean $correct Is $length the actual length of the string?
 	 * @return bool
 	 */
-	function testExactLength($string, $length, $correct)
+	function test_exact_length($string, $length, $correct)
 	{
 		return $this->assertSame(
 			$correct,
@@ -442,7 +442,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 */
-	function testFactoryMethodReturnsInstanceWithValues()
+	function test_factory_method_returns_instance_with_values()
 	{
 		$values = array(
 			'this'			=> 'something else',
@@ -464,7 +464,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 * DataProvider for the valid::ip() test
 	 * @return array
 	 */
-	public function providerIp()
+	public function provider_ip()
 	{
 		return array(
 			array('75.125.175.50',   FALSE, TRUE),
@@ -481,12 +481,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider  providerIp
+	 * @dataProvider  provider_ip
 	 * @param string  $input_ip
 	 * @param boolean $allow_private
 	 * @param boolean $expected_result
 	 */
-	public function testIp($input_ip, $allow_private, $expected_result)
+	public function test_ip($input_ip, $allow_private, $expected_result)
 	{
 		$this->assertEquals(
 			$expected_result,
@@ -495,11 +495,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Returns test data for testMaxLength()
+	 * Returns test data for test_max_length()
 	 *
 	 * @return array
 	 */
-	function providerMaxLength()
+	function provider_max_length()
 	{
 		return array(
 			// Border line
@@ -518,12 +518,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 * 
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerMaxLength
+	 * @dataProvider provider_max_length
 	 * @param string  $string    String to test
 	 * @param integer $maxlength Max length for this string
 	 * @param boolean $correct   Is $string <= $maxlength
 	 */
-	function testMaxLength($string, $maxlength, $correct)
+	function test_max_length($string, $maxlength, $correct)
 	{
 		 $this->assertSame(
 			$correct,
@@ -532,11 +532,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Returns test data for testMinLength()
+	 * Returns test data for test_min_length()
 	 *
 	 * @return array
 	 */
-	function providerMinLength()
+	function provider_min_length()
 	{
 		return array(
 			array('This is obviously long enough', 10, TRUE),
@@ -552,12 +552,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerMinLength
+	 * @dataProvider provider_min_length
 	 * @param string  $string     String to compare
 	 * @param integer $minlength  The minimum allowed length
 	 * @param boolean $correct    Is $string 's length >= $minlength
 	 */
-	function testMinLength($string, $minlength, $correct)
+	function test_min_length($string, $minlength, $correct)
 	{
 		$this->assertSame(
 			$correct,
@@ -566,11 +566,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Returns test data for testNotEmpty()
+	 * Returns test data for test_not_empty()
 	 *
 	 * @return array
 	 */
-	function providerNotEmpty()
+	function provider_not_empty()
 	{
 		// Create a blank arrayObject
 		$ao = new ArrayObject;
@@ -599,11 +599,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerNotEmpty
+	 * @dataProvider provider_not_empty
 	 * @param mixed   $value  Value to check
 	 * @param boolean $empty  Is the value really empty?
 	 */
-	function testNotEmpty($value, $empty)
+	function test_not_empty($value, $empty)
 	{
 		return $this->assertSame(
 			$empty,
@@ -614,7 +614,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the Validate::numeric() test
 	 */
-	public function providerNumeric()
+	public function provider_numeric()
 	{
 		return array(
 			array('12345', TRUE),
@@ -629,11 +629,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerNumeric
+	 * @dataProvider provider_numeric
 	 * @param string  $input     Input to test
 	 * @param boolean $expected  Whether or not $input is numeric
 	 */
-	public function testNumeric($input, $expected)
+	public function test_numeric($input, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -642,10 +642,10 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides test data for testPhone()
+	 * Provides test data for test_phone()
 	 * @return array
 	 */
-	public function providerPhone()
+	public function provider_phone()
 	{
 		return array(
 			array('0163634840',       NULL, TRUE),
@@ -666,11 +666,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider  providerPhone
+	 * @dataProvider  provider_phone
 	 * @param string  $phone     Phone number to test
 	 * @param boolean $expected  Is $phone valid
 	 */
-	public function testPhone($phone, $lengths, $expected)
+	public function test_phone($phone, $lengths, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -681,7 +681,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the valid::regex() test
 	 */
-	public function providerRegex()
+	public function provider_regex()
 	{
 		return array(
 			array('hello world', '/[a-zA-Z\s]++/', TRUE),
@@ -698,12 +698,12 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerRegex
+	 * @dataProvider provider_regex
 	 * @param string Value to test against
 	 * @param string Valid pcre regular expression
 	 * @param bool Does the value match the expression?
 	 */
-	public function testRegex($value, $regex, $expected)
+	public function test_regex($value, $regex, $expected)
 	{
 		$this->AssertSame(
 			$expected,
@@ -714,7 +714,7 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	/**
 	 * DataProvider for the valid::range() test
 	 */
-	public function providerRange()
+	public function provider_range()
 	{
 		return array(
 			array(1,  0,  2, TRUE),
@@ -733,13 +733,13 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerRange
+	 * @dataProvider provider_range
 	 * @param integer $number    Number to test
 	 * @param integer $min       Lower bound
 	 * @param integer $max       Upper bound
 	 * @param boolean $expected  Is Number within the bounds of $min && $max
 	 */
-	public function testRange($number, $min, $max, $expected)
+	public function test_range($number, $min, $max, $expected)
 	{
 		$this->AssertSame(
 			$expected,
@@ -748,11 +748,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Provides test data for testUrl()
+	 * Provides test data for test_url()
 	 *
 	 * @return array
 	 */
-	public function providerUrl()
+	public function provider_url()
 	{
 		return array(
 			array('http://google.com', TRUE),
@@ -767,11 +767,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @test
 	 * @group kohana.validation.helpers
-	 * @dataProvider providerUrl
+	 * @dataProvider provider_url
 	 * @param string  $url       The url to test
 	 * @param boolean $expected  Is it valid?
 	 */
-	public function testUrl($url, $expected)
+	public function test_url($url, $expected)
 	{
 		$this->assertSame(
 			$expected,

@@ -14,10 +14,10 @@ Class Kohana_NumTest extends Kohana_Unittest_TestCase
 {
 
 	/**
-	 * Provides test data for testOrdinal()
+	 * Provides test data for test_ordinal()
 	 * @return array
 	 */
-	function providerOrdinal()
+	function provider_ordinal()
 	{
 		return array(
 			array(0, 'th'),
@@ -32,20 +32,20 @@ Class Kohana_NumTest extends Kohana_Unittest_TestCase
 	/**
 	 *
 	 * @test
-	 * @dataProvider providerOrdinal
+	 * @dataProvider provider_ordinal
 	 * @param integer $number
 	 * @param <type> $expected
 	 */
-	function testOrdinal($number, $expected)
+	function test_ordinal($number, $expected)
 	{
 		$this->assertSame($expected, Num::ordinal($number));
 	}
 
 	/**
-	 * Provides test data for testFormat()
+	 * Provides test data for test_format()
 	 * @return array
 	 */
-	function providerFormat()
+	function provider_format()
 	{
 		return array(
 			// English
@@ -61,13 +61,13 @@ Class Kohana_NumTest extends Kohana_Unittest_TestCase
 	/**
 	 * @todo test locales
 	 * @test
-	 * @dataProvider providerFormat
+	 * @dataProvider provider_format
 	 * @param integer $number
 	 * @param integer $places
 	 * @param boolean $monetary
 	 * @param string $expected
 	 */
-	function testFormat($number, $places, $monetary, $expected)
+	function test_format($number, $places, $monetary, $expected)
 	{
 		$this->assertSame($expected, Num::format($number, $places, $monetary));
 	}

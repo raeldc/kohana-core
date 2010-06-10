@@ -14,11 +14,11 @@
 Class Kohana_DateTest extends Kohana_Unittest_TestCase
 {
 	/**
-	 * Provides test data for testDate()
+	 * Provides test data for test_date()
 	 *
 	 * @return array
 	 */
-	function providerAmPm()
+	function provider_am_pm()
 	{
 		return array(
 			// All possible values
@@ -59,11 +59,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * 
 	 * @test
 	 * @covers Date::ampm
-	 * @dataProvider providerAmPm
+	 * @dataProvider provider_am_pm
 	 * @param <type> $hour
 	 * @param <type> $expected
 	 */
-	function testAmPm($hour, $expected)
+	function test_am_pm($hour, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -72,11 +72,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testAdjust()
+	 * Provides test data for test_adjust()
 	 *
 	 * @return array
 	 */
-	function providerAdjust()
+	function provider_adjust()
 	{
 		return array(
 			// Might as well test all possibilities
@@ -114,12 +114,12 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * Tests Date::ampm()
 	 *
 	 * @test
-	 * @dataProvider providerAdjust
+	 * @dataProvider provider_adjust
 	 * @param integer $hour       Hour in 12 hour format
 	 * @param string  $ampm       Either am or pm
 	 * @param string  $expected   Expected result
 	 */
-	function testAdjust($hour, $ampm, $expected)
+	function test_adjust($hour, $ampm, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -128,11 +128,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testDays()
+	 * Provides test data for test_days()
 	 *
 	 * @return array
 	 */
-	function providerDays()
+	function provider_days()
 	{
 		return array(
 			// According to "the rhyme" these should be the same every year
@@ -158,12 +158,12 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @covers Date::days
-	 * @dataProvider providerDays
+	 * @dataProvider provider_days
 	 * @param integer $month
 	 * @param integer $year
 	 * @param integer $expected
 	 */
-	function testDays($month, $year, $expected)
+	function test_days($month, $year, $expected)
 	{
 		$days = Date::days($month, $year);
 
@@ -187,7 +187,7 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Date::months
 	 */
-	function testMonths()
+	function test_months()
 	{
 		$months = Date::months();
 
@@ -201,11 +201,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testSpan()
+	 * Provides test data for test_span()
 	 *
 	 * @return array
 	 */
-	function providerSpan()
+	function provider_span()
 	{
 		$time = time();
 		return array(
@@ -258,13 +258,13 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @covers Date::span
-	 * @dataProvider providerSpan
+	 * @dataProvider provider_span
 	 * @param integer $time1     Time in the past
 	 * @param integer $time2     Time to compare against
 	 * @param string  $output    Units to output
 	 * @param array   $expected  Array of $outputs => values
 	 */
-	function testSpan($time1, $time2, $output, $expected)
+	function test_span($time1, $time2, $output, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -273,7 +273,7 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data to testFuzzySpan
+	 * Provides test data to test_fuzzy_span
 	 * 
 	 * This test data is provided on the assumption that it
 	 * won't take phpunit more than 30 seconds to get the 
@@ -281,7 +281,7 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 *
 	 * @return array Test Data
 	 */
-	function providerFuzzySpan()
+	function provider_fuzzy_span()
 	{
 		return array(
 			array('moments ago', time() - 30),
@@ -350,11 +350,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * Test of Date::fuzy_span()
 	 *
 	 * @test
-	 * @dataProvider providerFuzzySpan
+	 * @dataProvider provider_fuzzy_span
 	 * @param string $expected Expected output
 	 * @param integer $timestamp Timestamp to use
 	 */
-	function testFuzzySpan($expected, $timestamp)
+	function test_fuzzy_span($expected, $timestamp)
 	{
 		$this->assertSame(
 			$expected,
@@ -363,11 +363,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/** 
-	 * Provides test data for testYears()
+	 * Provides test data for test_years()
 	 *
 	 * @return array Test Data
 	 */
-	function providerYears()
+	function provider_years()
 	{
 		return array(
 			array(
@@ -394,9 +394,9 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * Tests Data::years()
 	 *
 	 * @test
-	 * @dataProvider providerYears
+	 * @dataProvider provider_years
 	 */
-	function testYears($expected, $start = FALSE, $end = FALSE)
+	function test_years($expected, $start = FALSE, $end = FALSE)
 	{
 		$this->assertSame(
 			$expected,
@@ -404,7 +404,7 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 		);
 	}
 
-	function providerHours()
+	function provider_hours()
 	{
 		return array(
 			array(
@@ -430,9 +430,9 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * Test for Date::hours
 	 *
 	 * @test
-	 * @dataProvider providerHours
+	 * @dataProvider provider_hours
 	 */
-	function testHours($expected, $step = 1, $long = FALSE, $start = NULL) 
+	function test_hours($expected, $step = 1, $long = FALSE, $start = NULL) 
 	{
 		$this->assertSame(
 			$expected,
@@ -441,11 +441,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testSeconds
+	 * Provides test data for test_seconds
 	 *
 	 * @return array Test data
 	 */
-	function providerSeconds()
+	function provider_seconds()
 	{
 		return array(
 			array(
@@ -474,10 +474,10 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	/**
 	 *
 	 * @test
-	 * @dataProvider providerSeconds
+	 * @dataProvider provider_seconds
 	 * @covers Date::seconds
 	 */
-	function testSeconds($expected, $step = 1, $start = 0, $end = 60)
+	function test_seconds($expected, $step = 1, $start = 0, $end = 60)
 	{
 		$this->assertSame(
 			$expected,
@@ -486,11 +486,11 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testMinutes
+	 * Provides test data for test_minutes
 	 *
 	 * @return array Test data
 	 */
-	function providerMinutes()
+	function provider_minutes()
 	{
 		return array(
 			array(
@@ -508,9 +508,9 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	/**
 	 *
 	 * @test
-	 * @dataProvider providerMinutes
+	 * @dataProvider provider_minutes
 	 */
-	function testMinutes($expected, $step)
+	function test_minutes($expected, $step)
 	{
 		$this->assertSame(
 			$expected,
@@ -525,7 +525,7 @@ Class Kohana_DateTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Date::minutes
 	 */
-	function testMinutesDefaultsToUsingStepOf5()
+	function test_minutes_defaults_to_using_step_of5()
 	{
 		$minutes = array( 
 			0 => '00', 5 => '05', 10 => '10', 

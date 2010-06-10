@@ -56,7 +56,7 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	 * 
 	 * @return array
 	 */
-	function providerBase()
+	function provider_base()
 	{
 		return array(
 			// $index, $protocol, $expected, $enviroment
@@ -85,13 +85,13 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	 * Tests URL::base()
 	 *
 	 * @test
-	 * @dataProvider providerBase
+	 * @dataProvider provider_base
 	 * @param boolean $index       Parameter for Url::base()
 	 * @param boolean $protocol    Parameter for Url::base()
 	 * @param string  $expected    Expected url
 	 * @param array   $enviroment  Array of enviroment vars to change @see Kohana_URLTest::setEnvironment()
 	 */
-	function testBase($index, $protocol, $expected, array $enviroment = array())
+	function test_base($index, $protocol, $expected, array $enviroment = array())
 	{
 		$this->setEnvironment($enviroment);
 
@@ -102,11 +102,11 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testSite()
+	 * Provides test data for test_site()
 	 * 
 	 * @return array
 	 */
-	function providerSite()
+	function provider_site()
 	{
 		return array(
 			array('', FALSE,		'/kohana/index.php/'),
@@ -136,13 +136,13 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	 * Tests URL::site()
 	 *
 	 * @test
-	 * @dataProvider providerSite
+	 * @dataProvider provider_site
 	 * @param string          $uri         URI to use
 	 * @param boolean|string  $protocol    Protocol to use
 	 * @param string          $expected    Expected result
 	 * @param array           $enviroment  Array of enviroment vars to set
 	 */
-	function testSite($uri, $protocol, $expected, array $enviroment = array())
+	function test_site($uri, $protocol, $expected, array $enviroment = array())
 	{
 		$this->setEnvironment($enviroment);
 
@@ -153,10 +153,10 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testTitle()
+	 * Provides test data for test_title()
 	 * @return array
 	 */
-	function providerTitle()
+	function provider_title()
 	{
 		return array(
 			// Tests that..
@@ -185,7 +185,7 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 	 * Tests URL::title()
 	 *
 	 * @test
-	 * @dataProvider providerTitle
+	 * @dataProvider provider_title
 	 * @param string $title        Input to convert
 	 * @param string $separator    Seperate to replace invalid characters with
 	 * @param string $expected     Expected result

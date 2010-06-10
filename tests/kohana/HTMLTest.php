@@ -13,17 +13,17 @@
  */
 Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 {	
-	protected $environmentDefaults = array(
+	protected $environmentDefault = array(
 		'Kohana::$base_url' => '/kohana/',
 		'HTTP_HOST'	=> 'www.kohanaframework.org',
 	);
 
 	/**
-	 * Provides test data for testAttributes()
+	 * Provides test data for test_attributes()
 	 * 
 	 * @return array
 	 */
-	function providerAttributes()
+	function provider_attributes()
 	{
 		return array(
 			array(
@@ -45,11 +45,11 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::attributes()
 	 *
 	 * @test
-	 * @dataProvider providerAttributes
+	 * @dataProvider provider_attributes
 	 * @param array  $attributes  Attributes to use
 	 * @param string $expected    Expected output
 	 */
-	function testAttributes($attributes, $expected)
+	function test_attributes($attributes, $expected)
 	{
 		$this->assertSame(
 			$expected,
@@ -58,11 +58,11 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testScript
+	 * Provides test data for test_script
 	 *
 	 * @return array Array of test data
 	 */
-	function providerScript()
+	function provider_script()
 	{
 		return array(
 			array(
@@ -76,13 +76,13 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::script()
 	 *
 	 * @test
-	 * @dataProvider  providerScript
+	 * @dataProvider  provider_script
 	 * @param string  $expected       Expected output
 	 * @param string  $file           URL to script
 	 * @param array   $attributes     HTML attributes for the anchor
 	 * @param bool    $index          Should the index file be included in url?
 	 */
-	function testScript($expected, $file, array $attributes = NULL, $index = FALSE)
+	function test_script($expected, $file, array $attributes = NULL, $index = FALSE)
 	{
 		$this->assertSame(
 			$expected,
@@ -95,7 +95,7 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 *
 	 * @return array Array of test data
 	 */
-	function providerStyle()
+	function provider_style()
 	{
 		return array(
 			array(
@@ -111,13 +111,13 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::style()
 	 *
 	 * @test
-	 * @dataProvider  providerStyle
+	 * @dataProvider  provider_style
 	 * @param string  $expected     The expected output
 	 * @param string  $file         The file to link to
 	 * @param array   $attributes   Any extra attributes for the link
 	 * @param bool    $index        Whether the index file should be added to the link
 	 */
-	function testStyle($expected, $file, array $attributes = NULL, $index = FALSE)
+	function test_style($expected, $file, array $attributes = NULL, $index = FALSE)
 	{
 		$this->assertSame(
 			$expected,
@@ -126,11 +126,11 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testObfuscate
+	 * Provides test data for test_obfuscate
 	 *
 	 * @return array Array of test data
 	 */
-	function providerObfuscate()
+	function provider_obfuscate()
 	{
 		return array(
 			array('something crazy'),
@@ -142,10 +142,10 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::obfuscate
 	 *
 	 * @test
-	 * @dataProvider   providerObfuscate
+	 * @dataProvider   provider_obfuscate
 	 * @param string   $string            The string to obfuscate
 	 */
-	function testObfuscate($string)
+	function test_obfuscate($string)
 	{
 		$this->assertNotSame(
 			$string,
@@ -154,11 +154,11 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for testAnchor
+	 * Provides test data for test_anchor
 	 *
 	 * @return array Test data
 	 */
-	function providerAnchor()
+	function provider_anchor()
 	{
 		return array(
 			array(
@@ -181,9 +181,9 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 * Tests HTML::anchor
 	 *
 	 * @test
-	 * @dataProvider providerAnchor
+	 * @dataProvider provider_anchor
 	 */
-	function testAnchor($expected, array $options, $uri, $title = NULL, array $attributes = NULL, $protocol = NULL)
+	function test_anchor($expected, array $options, $uri, $title = NULL, array $attributes = NULL, $protocol = NULL)
 	{
 		$this->setEnvironment($options);
 
@@ -194,11 +194,11 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Data provider for testFileAnchor
+	 * Data provider for test_file_anchor
 	 *
 	 * @return array
 	 */
-	function providerFileAnchor()
+	function provider_file_anchor()
 	{
 		return array(
 			array(
@@ -215,9 +215,9 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @covers HTML::file_anchor
-	 * @dataProvider providerFileAnchor
+	 * @dataProvider provider_file_anchor
 	 */
-	function testFileAnchor($expected, array $options, $file, $title = NULL, array $attributes = NULL, $protocol = NULL)
+	function test_file_anchor($expected, array $options, $file, $title = NULL, array $attributes = NULL, $protocol = NULL)
 	{
 		$this->assertSame(
 			$expected,

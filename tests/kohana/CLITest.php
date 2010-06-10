@@ -67,7 +67,7 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers CLI::options
 	 */
-	function testOnlyParsesWantedArguments()
+	function test_only_parses_wanted_arguments()
 	{
 		$options = CLI::options('uri');
 
@@ -83,7 +83,7 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers CLI::options
 	 */
-	function testDoesNotParseInvalidArguments()
+	function test_does_not_parse_invalid_arguments()
 	{
 		$options = CLI::options('uri', 'invalid');
 		
@@ -98,7 +98,7 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers CLI::options
 	 */
-	function testParsesMultipleArguments()
+	function test_parses_multiple_arguments()
 	{
 		$options = CLI::options('uri', 'version');
 
@@ -115,7 +115,7 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers CLI::options
 	 */
-	function testParsesArgumentsWithoutValueAsNull()
+	function test_parses_arguments_without_value_as_null()
 	{
 		$options = CLI::options('uri', 'we_are_cool');
 
@@ -129,7 +129,7 @@ Class Kohana_CLITest extends Kohana_Unittest_TestCase
 	 * @covers CLI::options
 	 * @ticket 2642
 	 */
-	function testCliOnlySplitsOnTheFirstEquals()
+	function test_cli_only_splits_on_the_first_equals()
 	{
 		$options = CLI::options('important');
 

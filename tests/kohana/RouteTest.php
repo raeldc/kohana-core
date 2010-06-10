@@ -18,7 +18,7 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 */
-	function testMatchesReturnsFalseOnFailure()
+	function test_matches_returns_false_on_failure()
 	{
 		$route = new Route('projects/(<project_id>/(<controller>(/<action>(/<id>))))');
 
@@ -32,7 +32,7 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Route
 	 */
-	function testMatchesReturnsArrayOfParametersOnSuccessfulMatch()
+	function test_matches_returns_array_of_parameters_on_successful_match()
 	{
 		$route = new Route('(<controller>(/<action>(/<id>)))');
 		
@@ -54,7 +54,7 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Route
 	 */
-	function testDefaultsAreUsedIfParamsArentSpecified()
+	function test_defaults_are_used_if_params_arent_specified()
 	{
 		$route = new Route('(<controller>(/<action>(/<id>)))');
 		$route->defaults(array('controller' => 'welcome', 'action' => 'index'));
@@ -76,7 +76,7 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Route
 	 */
-	function testRequiredParametersAreNeeded()
+	function test_required_parameters_are_needed()
 	{
 		$route = new Route('admin(/<controller>(/<action>(/<id>)))');
 
@@ -103,7 +103,7 @@ class Kohana_RouteTest extends Kohana_Unittest_TestCase
 	 * @test
 	 * @covers Route::uri
 	 */
-	function testReverseRoutingReturnsRoutesURIIfRouteIsStatic()
+	function test_reverse_routing_returns_routes_uri_if_route_is_static()
 	{
 		$route = new Route('info/about_us');
 

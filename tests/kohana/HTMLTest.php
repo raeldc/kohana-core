@@ -185,7 +185,7 @@ Class Kohana_HTMLTest extends Kohana_Unittest_TestCase
 	 */
 	function test_anchor($expected, array $options, $uri, $title = NULL, array $attributes = NULL, $protocol = NULL)
 	{
-		$this->setEnvironment($options);
+		//$this->setEnvironment($options);
 
 		$this->assertSame(
 			$expected,

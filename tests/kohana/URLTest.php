@@ -15,12 +15,6 @@
 Class Kohana_URLTest extends Kohana_Unittest_TestCase
 {
 	/**
-	 * This is just a temp fix until f078401 is merged into the blessed phpunit repo
-	 * @var array
-	 */
-	protected $_get =  array();
-
-	/**
 	 * Default values for the environment, see setEnvironment
 	 * @var array
 	 */
@@ -31,25 +25,6 @@ Class Kohana_URLTest extends Kohana_Unittest_TestCase
 		'HTTP_HOST' => 'example.com',
 		'_GET'		=> array(),
 	);
-
-	/**
-	 * Sets up the enviroment for each test, loads default enviroment values
-	 */
-	function setUp()
-	{
-		$this->_get = $_GET;
-		parent::setUp();
-	}
-
-	/**
-	 * Resets the enviroment after each test
-	 */
-	function tearDown()
-	{
-		parent::tearDown();
-		$_GET = $this->_get;
-	}
-
 
 	/**
 	 * Provides test data for testBase()

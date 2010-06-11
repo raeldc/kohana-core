@@ -12,7 +12,7 @@
  * @copyright  (c) 2008-2010 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class Kohana_CoreTest extends PHPUnit_Framework_TestCase
+class Kohana_CoreTest extends Kohana_Unittest_TestCase
 {
 	/**
 	 * Provides test data for testSanitize()
@@ -40,12 +40,9 @@ class Kohana_CoreTest extends PHPUnit_Framework_TestCase
 	 */
 	function testSanitize($value, $result)
 	{
-		$old_quotes = Kohana::$magic_quotes;
-		Kohana::$magic_quotes = TRUE;
+		$this->setEnvironment(array('Kohana::$magic_quotes' => TRUE));
 
 		$this->assertSame($result, Kohana::sanitize($value));
-
-		Kohana::$magic_quotes = $old_quotes;
 	}
 
 	/**

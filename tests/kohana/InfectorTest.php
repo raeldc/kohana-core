@@ -12,7 +12,7 @@
  * @copyright  (c) 2008-2010 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class Kohana_InflectorTest extends PHPUnit_Framework_TestCase
+class Kohana_InflectorTest extends Kohana_Unittest_TestCase
 {
 	/**
 	 * Provides test data for testLang()

@@ -206,9 +206,11 @@ Class Kohana_ValidateTest extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array('12345',    TRUE),
-		    array('10.5',     FALSE),
-		    array('abcde',    FALSE),
-		    array('abcd1234', FALSE)
+			array('10.5',     FALSE),
+			array('abcde',    FALSE),
+			array('abcd1234', FALSE),
+			array('-5',       FALSE),
+			array(-5,         FALSE),
 		);
 	}
 

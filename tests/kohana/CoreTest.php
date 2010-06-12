@@ -340,7 +340,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	{
 		return array(
 			array(Kohana::find_file('classes', 'kohana'), 'APPPATH'.DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.'kohana.php'), // This kinda sucks, app and sys are the same for unit tests
-			array(Kohana::find_file('classes', 'kohana/unittest/runner'), 'MODPATH/unittest/classes/kohana/unittest/runner.php'),
+			array(Kohana::find_file('classes', 'kohana/unittest/runner'), 'MODPATH'.DIRECTORY_SEPARATOR.'unittest'.DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.'kohana'.DIRECTORY_SEPARATOR.'unittest'.DIRECTORY_SEPARATOR.'runner.php'),
 		);
 	}
 
@@ -349,7 +349,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerDebugPath
-	 * @covers Kohana::debug
+	 * @covers Kohana::debug_path
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -357,7 +357,6 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	{
 		$this->assertEquals($expected, Kohana::debug_path($path));
 	}
-
 
 	/**
 	 * Provides test data for testModules()
@@ -369,8 +368,8 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 		return array(
 			array(NULL, array('unittest' => MODPATH.'unittest/')),
 			array(array(), array()),
-			array(array('unittest' => MODPATH.'unittest'), array('unittest' => MODPATH.'unittest/')),
 			array(array('unittest' => MODPATH.'foobar'), array()),
+			array(array('unittest' => MODPATH.'unittest'), array('unittest' => MODPATH.'unittest/')),
 		);
 	}
 
@@ -386,5 +385,88 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	function testModules($source, $expected)
 	{
 		$this->assertEquals($expected, Kohana::modules($source));
+	}
+
+	/**
+	 * Provides test data for testIncludePaths()
+	 * 
+	 * @return array
+	 */
+	function providerIncludePaths()
+	{
+		return array(
+			array(array(APPPATH, MODPATH.'unittest/', SYSPATH)),
+		);
+	}
+
+	/**
+	 * Tests Kohana::include_paths()
+	 *
+	 * @test
+	 * @dataProvider providerIncludePaths
+	 * @covers Kohana::include_paths
+	 * @param boolean $value  Input for Kohana::sanitize
+	 */
+	function testIncludePaths($expected)
+	{
+		$this->assertEquals($expected, Kohana::include_paths());
+	}
+
+	/**
+	 * Provides test data for testExceptionText()
+	 * 
+	 * @return array
+	 */
+	function providerExceptionText()
+	{
+		return array(
+			array(new Kohana_Exception('foobar'), 'Kohana_Exception [ 0 ]: foobar ~ APPPATH/tests/kohana/CoreTest.php [ '.__LINE__.' ]'),
+		);
+	}
+
+	/**
+	 * Tests Kohana::exception_text()
+	 *
+	 * @test
+	 * @dataProvider providerExceptionText
+	 * @covers Kohana::exception_text
+	 * @param object $exception exception to test
+	 * @param string $expected  expected output
+	 */
+	function testExceptionText($exception, $expected)
+	{
+		$this->assertEquals($expected, Kohana::exception_text($exception));
+	}
+
+	/**
+	 * Provides test data for testDump()
+	 * 
+	 * @return array
+	 */
+	function providerDump()
+	{
+		return array(
+			array('foobar', 128, '<small>string</small><span>(6)</span> "foobar"'),
+			array('foobar', 2, '<small>string</small><span>(6)</span> "fo&nbsp;&hellip;"'),
+			array(NULL, 128, '<small>NULL</small>'),
+			array(TRUE, 128, '<small>bool</small> TRUE'),
+			array(array('foobar'), 128, "<small>array</small><span>(1)</span> <span>(\n    0 => <small>string</small><span>(6)</span> \"foobar\"\n)</span>"),
+			array(new StdClass, 128, "<small>object</small> <span>stdClass(0)</span> <code>{\n}</code>"),
+		);
+	}
+
+	/**
+	 * Tests Kohana::dump()
+	 *
+	 * @test
+	 * @dataProvider providerDump
+	 * @covers Kohana::dump
+	 * @covers Kohana::_dump
+	 * @param object $exception exception to test
+	 * @param string $expected  expected output
+	 */
+	function testDump($input, $length, $expected)
+	{
+		$this->assertEquals($expected, Kohana::dump($input, $length));
 	}
 }

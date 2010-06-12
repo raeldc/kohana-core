@@ -35,6 +35,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerSanitize
+	 * @covers Kohana::sanitize
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -62,10 +63,11 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	}
 
 	/**
-	 * Tests Kohana::santize()
+	 * Tests Kohana::find_file()
 	 *
 	 * @test
 	 * @dataProvider providerFindFile
+	 * @covers Kohana::find_file
 	 * @param boolean $value  Input for Kohana::auto_load
 	 * @param boolean $result Output for Kohana::auto_load
 	 */
@@ -99,6 +101,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerListFiles
+	 * @covers Kohana::list_files
 	 * @param boolean $folder Input for Kohana::list_files
 	 * @param boolean $result Output for Kohana::list_files
 	 */
@@ -109,6 +112,8 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 
 	/**
 	 * Tests Kohana::init()
+	 * @covers Kohana::init
+	 * @covers Kohana::deinit
 	 *
 	 * @test
 	 */
@@ -140,6 +145,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 * Tests Kohana::globals()
 	 *
 	 * @test
+	 * @covers Kohana::globals
 	 */
 	function testGlobals()
 	{
@@ -170,6 +176,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerCache
+	 * @covers Kohana::cache
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -209,6 +216,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerMessage
+	 * @covers Kohana::message
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -235,6 +243,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerErrorHandler
+	 * @covers Kohana::error_handler
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -274,6 +283,7 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerExceptionHandler
+	 * @covers Kohana::exception_handler
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
@@ -312,11 +322,69 @@ class Kohana_CoreTest extends Kohana_Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider providerDebug
+	 * @covers Kohana::debug
 	 * @param boolean $value  Input for Kohana::sanitize
 	 * @param boolean $result Output for Kohana::sanitize
 	 */
 	function testdebug($thing, $expected)
 	{
 		$this->assertEquals($expected, Kohana::debug($thing));
+	}
+
+	/**
+	 * Provides test data for testDebugPath()
+	 * 
+	 * @return array
+	 */
+	function providerDebugPath()
+	{
+		return array(
+			array(Kohana::find_file('classes', 'kohana'), 'APPPATH'.DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.'kohana.php'), // This kinda sucks, app and sys are the same for unit tests
+			array(Kohana::find_file('classes', 'kohana/unittest/runner'), 'MODPATH/unittest/classes/kohana/unittest/runner.php'),
+		);
+	}
+
+	/**
+	 * Tests Kohana::debug_path()
+	 *
+	 * @test
+	 * @dataProvider providerDebugPath
+	 * @covers Kohana::debug
+	 * @param boolean $value  Input for Kohana::sanitize
+	 * @param boolean $result Output for Kohana::sanitize
+	 */
+	function testDebugPath($path, $expected)
+	{
+		$this->assertEquals($expected, Kohana::debug_path($path));
+	}
+
+
+	/**
+	 * Provides test data for testModules()
+	 * 
+	 * @return array
+	 */
+	function providerModules()
+	{
+		return array(
+			array(NULL, array('unittest' => MODPATH.'unittest/')),
+			array(array(), array()),
+			array(array('unittest' => MODPATH.'unittest'), array('unittest' => MODPATH.'unittest/')),
+			array(array('unittest' => MODPATH.'foobar'), array()),
+		);
+	}
+
+	/**
+	 * Tests Kohana::modules()
+	 *
+	 * @test
+	 * @dataProvider providerModules
+	 * @covers Kohana::modules
+	 * @param boolean $value  Input for Kohana::sanitize
+	 * @param boolean $result Output for Kohana::sanitize
+	 */
+	function testModules($source, $expected)
+	{
+		$this->assertEquals($expected, Kohana::modules($source));
 	}
 }

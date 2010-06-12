@@ -51,11 +51,25 @@ abstract class Kohana_Session {
 			// Create a new session instance
 			Session::$instances[$type] = $session = new $class($config, $id);
 
-			// Write the session at shutdown
-			register_shutdown_function(array($session, 'write'));
+			// Make sure the Session::write is the last to be called on shutdown
+			register_shutdown_function(array('Session', 'prepare'), $session);
 		}
 
 		return Session::$instances[$type];
+	}
+	
+	/**
+	 * A preparatory method that puts Session::write at the end of 
+	 * the register_shutdown_function queue.
+	 *
+	 * @param Session $session 
+	 * @return void
+	 * @author Israel D. Canasa
+	 */
+	public static function prepare($session)
+	{
+		// Write the session at shutdown
+		register_shutdown_function(array($session, 'write'));
 	}
 
 	// Cookie name

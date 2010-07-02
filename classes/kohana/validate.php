@@ -144,8 +144,55 @@ class Kohana_Validate extends ArrayObject {
 	 */
 	public static function url($url)
 	{
-		// Regex taken from http://fightingforalostcause.net/misc/2006/compare-email-regex.php
-		return (bool) preg_match('/^[a-z0-9+-.]+:\/\/(((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?$/i', $url);
+		// Based on http://www.apps.ietf.org/rfc/rfc1738.html#sec-5
+		if ( ! preg_match(
+			'~^
+
+			# scheme
+			[-a-z0-9+.]++://
+
+			# username:password (optional)
+			(?:
+				    [-a-z0-9$_.+!*\'(),;?&=%]++   # username
+				(?::[-a-z0-9$_.+!*\'(),;?&=%]++)? # password (optional)
+				@
+			)?
+
+			(?:
+				# ip address
+				\d{1,3}+(?:\.\d{1,3}+){3}+
+
+				| # or
+
+				# hostname (captured)
+				(
+					     (?!-)[-a-z0-9]{1,63}+(?<!-)
+					(?:\.(?!-)[-a-z0-9]{1,63}+(?<!-)){0,126}+
+				)
+			)
+
+			# port (optional)
+			(?::\d{1,5}+)?
+
+			# path (optional)
+			(?:/.*)?
+
+			$~iDx', $url, $matches))
+			return FALSE;
+
+		// We matched an IP address
+		if ( ! isset($matches[1]))
+			return TRUE;
+
+		// Check maximum length of the whole hostname
+		// http://en.wikipedia.org/wiki/Domain_name#cite_note-0
+		if (strlen($matches[1]) > 253)
+			return FALSE;
+
+		// An extra check for the top level domain
+		// It must start with a letter
+		$tld = ltrim(substr($matches[1], (int) strrpos($matches[1], '.')), '.');
+		return ctype_alpha($tld[0]);
 	}
 
 	/**
@@ -848,7 +895,7 @@ class Kohana_Validate extends ArrayObject {
 
 				if ($passed === FALSE)
 				{
-					// Remove the field name from the parameters
+					// Remove the field value from the parameters
 					array_shift($params);
 
 					// Add the rule to the errors
